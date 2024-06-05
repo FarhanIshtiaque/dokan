@@ -14,7 +14,8 @@ enum Method { POST, GET, PUT, DELETE, PATCH }
 class HttpService {
   Dio? _dio;
 
-  static header() => {"Content-Type": "application/json"};
+  static header() => {"Content-Type": "application/json"
+  };
 
   Future<HttpService> init() async {
     _dio = Dio(BaseOptions(baseUrl: ApiEndPoints.baseUrl, headers: header()));
@@ -53,12 +54,21 @@ class HttpService {
 
     try {
       if (method == Method.POST) {
+        if(authToken != null){
+          response = await _dio!.post(url,
+            data: params,
+            options: Options(headers: {"Authorization": "Bearer $authToken"}),
 
+          );
+        }
+        response = await _dio!.post(url,
+          data: params,
+
+
+        );
 
         // response = await _dio!.post(url, data: params,options: Options(headers:{"Authorization": authToken}));
-        response = await _dio!.post(url,
-            data: params,
-            options: Options(headers: {"Authorization": "Bearer $authToken"}));
+
       } else if (method == Method.DELETE) {
         response = await _dio!.delete(url);
       } else if (method == Method.PATCH) {
