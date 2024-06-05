@@ -183,7 +183,7 @@ class SignUp extends StatelessWidget {
                                 signUpController.countryPhoneCode.value +
                                     StringHelper.unMask(
                                         signUpController.phoneController.text));
-                            Get.toNamed(Routes.CREATEPASSWORD);
+                           // Get.toNamed(Routes.CREATEPASSWORD);
                           }
                         },
 

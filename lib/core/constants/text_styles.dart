@@ -111,7 +111,7 @@ abstract class AppTextStyle {
   static const TextStyle headingXXSmall = TextStyle(
 
       fontFamily: 'Nunito',
-      fontSize: 14,
+      fontSize: 18,
       fontWeight: FontWeight.w700,
       height: 1.4
   );

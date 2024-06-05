@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 
 import '../../core/constants/app_colors.dart';
+import '../../core/constants/text_styles.dart';
 
 ThemeData theme() {
   return ThemeData(
@@ -17,18 +18,18 @@ ThemeData theme() {
 }
 
 AppBarTheme appBarTheme() {
-  return const AppBarTheme(
+  return  AppBarTheme(
     titleSpacing: 24,
     color: Colors.white,
     elevation: 0,
    // toolbarHeight: 70,
    // shadowColor: AppColors.gray50,
-    centerTitle: false,
+    centerTitle: true,
 
-    iconTheme: IconThemeData(
+    iconTheme: const IconThemeData(
       color: AppColors.black,
 
     ),
-    titleTextStyle: TextStyle(color: Color(0XFF8B8B8B), fontSize: 18),
+    titleTextStyle: AppTextStyle.headingSmall.copyWith(color: AppColors.black),
   );
 }

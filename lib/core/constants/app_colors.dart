@@ -4,6 +4,7 @@ class AppColors {
 
   static const Color black = Color(0xFF000000);
   static const Color sunsetOrange = Color(0xFFF75F55);
+  static const Color ultraRed = Color(0xFFFF708A);
   static const Color white = Color(0xFFFFFFFF);
   static const Color transparent = Color(0x00000000);
 

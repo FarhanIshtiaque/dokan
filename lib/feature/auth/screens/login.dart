@@ -101,7 +101,7 @@ class Login extends StatelessWidget {
                   ),
                   GestureDetector(
                     onTap: () {
-                      Get.toNamed(Routes.FORGOTPASSWORD);
+                    //  Get.toNamed(Routes.FORGOTPASSWORD);
                     },
                     child: Align(
                       alignment: Alignment.centerRight,

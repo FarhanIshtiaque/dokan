@@ -93,7 +93,7 @@ class SignUpController extends GetxController {
                 size: 40,
               ),
             );
-            Get.toNamed(Routes.VERIFYOTP);
+          //  Get.toNamed(Routes.VERIFYOTP);
           } else if (data["success"] == false) {
             Get.snackbar(
               'Opps',

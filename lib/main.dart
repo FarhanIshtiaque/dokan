@@ -33,7 +33,7 @@ class MyApp extends StatelessWidget {
         getPages: AppPages.pages,
         initialRoute:
 
-          Routes.LOGIN
+          Routes.HOME
         //Routes.CREATEEVENT
       //  StorageHelper.isLoggedIn() ? Routes.DASHBOARD : Routes.LOGIN,
 

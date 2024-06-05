@@ -65,7 +65,7 @@ class LoginController extends GetxController {
                 ),
                 shouldIconPulse: false,
               );
-              Get.offAllNamed(Routes.DASHBOARD);
+          //    Get.offAllNamed(Routes.DASHBOARD);
             } else {
               Get.snackbar(
                 "Opps",
@@ -77,7 +77,7 @@ class LoginController extends GetxController {
                 ),
                 shouldIconPulse: false,
               );
-              Get.toNamed(Routes.LOGINVERIFYOTP);
+         //     Get.toNamed(Routes.LOGINVERIFYOTP);
             }
           } else if (data['success'] == false) {
             Get.snackbar(
@@ -141,7 +141,7 @@ class LoginController extends GetxController {
               ),
               shouldIconPulse: false,
             );
-            Get.offAllNamed(Routes.DASHBOARD);
+          //  Get.offAllNamed(Routes.DASHBOARD);
           } else if (data["success"] == false) {
             Get.snackbar(
               'Opps',
