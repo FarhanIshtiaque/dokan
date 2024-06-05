@@ -2,8 +2,10 @@ import 'package:country_flags/country_flags.dart';
 import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:heroicons/heroicons.dart';
+import 'package:iconsax/iconsax.dart';
 
 import 'package:simple_gradient_text/simple_gradient_text.dart';
 
@@ -41,69 +43,17 @@ class SignUp extends StatelessWidget {
       extendBodyBehindAppBar: true,
       body: SingleChildScrollView(
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
             // SvgPicture.asset(
             //     AppAssets.loginShape
             // )
-            SizedBox(
-              height: 296.h,
-              width: double.maxFinite,
-              child: Stack(
-                children: [
-                  Image.asset(
-                    AppAssets.loginShape1,
-                    fit: BoxFit.cover,
-                    width: double.maxFinite,
-                  ),
-                  Positioned(
-                    left: 0,
-                    right: 0,
-                    bottom: 150,
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        const Text('Welcome to'),
-                        const SizedBox(
-                          height: 8,
-                        ),
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(8),
-                          child: SizedBox(
-                              height: 40,
-                              width: 40,
-                              child: Image.asset(AppAssets.morph)),
-                        )
-                      ],
-                    ),
-                  ),
-                  Positioned(
-                    left: 0,
-                    right: 0,
-                    bottom: 64,
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Text(
-                          'Sign Up',
-                          textAlign: TextAlign.center,
-                          style: AppTextStyle.headingSmall
-                              .copyWith(fontWeight: FontWeight.w900),
-                        ),
-                        const SizedBox(
-                          height: 8,
-                        ),
-                        const Text(
-                          'Create your account with few easy steps',
-                          style: AppTextStyle.labelSmall,
-                        )
-                      ],
-                    ),
-                  ),
-                ],
-              ),
+            SizedBox(height: 80.h,),
+            SvgPicture.asset(
+              AppAssets.dokanLogo,
             ),
+            SizedBox(height: 60.h,),
             Padding(
               padding: const EdgeInsets.symmetric(
                   horizontal: AppValues.horizontalPadding),
@@ -112,54 +62,20 @@ class SignUp extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Flexible(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              const Text(
-                                'First Name',
-                                style: AppTextStyle.labelMedium,
-                              ),
-                              const SizedBox(
-                                height: 8,
-                              ),
-                              PrimaryTextField(
-                                hintText: "First name",
-                                controller:
-                                    signUpController.firstNameController,
-                                validator: (v) =>
-                                    Validator.validateFirstName(v!),
-                              ),
-                            ],
-                          ),
-                        ),
-                        const SizedBox(
-                          width: 16,
-                        ),
-                        Flexible(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              const Text(
-                                'Last Name',
-                                style: AppTextStyle.labelMedium,
-                              ),
-                              const SizedBox(
-                                height: 8,
-                              ),
-                              PrimaryTextField(
-                                hintText: "Last name",
-                                validator: (v) =>
-                                    Validator.validateLastName(v!),
-                                controller: signUpController.lastNameController,
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
+                    const Text(
+                      'Name',
+                      style: AppTextStyle.labelMedium,
+                    ),
+                    const SizedBox(
+                      height: 8,
+                    ),
+                    PrimaryTextField(
+                      prefixIcon: HeroIcon(HeroIcons.user),
+                      hintText: "Type your name",
+                      controller:
+                      signUpController.firstNameController,
+                      validator: (v) =>
+                          Validator.validateFirstName(v!),
                     ),
                     const SizedBox(
                       height: 16,
@@ -172,6 +88,7 @@ class SignUp extends StatelessWidget {
                       height: 8,
                     ),
                     PrimaryTextField(
+                      prefixIcon: const HeroIcon(HeroIcons.envelope),
                       hintText: "Type your email",
                       controller: signUpController.emailController,
                       validator: (v) => Validator.validateEmail(v!),
@@ -180,114 +97,65 @@ class SignUp extends StatelessWidget {
                       height: 16,
                     ),
                     const Text(
-                      'Phone',
+                      'Password',
                       style: AppTextStyle.labelMedium,
                     ),
                     const SizedBox(
                       height: 8,
                     ),
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SizedBox(
-                          width: 88,
-                          child: PrimaryTextField(
+                    Obx(
+                          () => PrimaryTextField(
+                            prefixIcon: const HeroIcon(HeroIcons.lockClosed),
+                        obscureText: signUpController.isObscure.value,
+                        hintText: "Type your password",
+                        controller: signUpController.passwordController,
+                        validator: (v) => Validator.validatePassword(v!),
+                        suffixIcon: GestureDetector(
                             onTap: () {
-                              showCountryPicker(
-                                countryListTheme: CountryListThemeData(
-                                    bottomSheetHeight: Get.height * .7,
-                                    borderRadius: const BorderRadius.only(
-                                        topRight: Radius.circular(8),
-                                        topLeft: Radius.circular(8)),
-                                    inputDecoration: InputDecoration(
-                                      prefixIconColor:
-                                          MaterialStateColor.resolveWith(
-                                              (states) => states.contains(
-                                                      MaterialState.focused)
-                                                  ? AppColors.gray500
-                                                  : AppColors.gray200),
-                                      suffixIconColor:
-                                          MaterialStateColor.resolveWith(
-                                              (states) => states.contains(
-                                                      MaterialState.focused)
-                                                  ? AppColors.gray500
-                                                  : AppColors.gray200),
-                                      fillColor: AppColors.gray100,
-                                      filled: true,
-                                      hintStyle: AppTextStyle.bodyMedium
-                                          .copyWith(color: AppColors.gray700),
-                                      //  hintStyle: bodyMedium14.copyWith(color: AppColors.gray200),
-                                      contentPadding: const EdgeInsets.only(
-                                          left: 16, top: 11, bottom: 11),
-                                      border: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(8),
-                                        borderSide: const BorderSide(
-                                            color: AppColors.gray100,
-                                            width: 1.0),
-                                      ),
-                                      focusedBorder: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(8),
-                                        borderSide: const BorderSide(
-                                            color: AppColors.gray500,
-                                            width: 1.0),
-                                      ),
-                                      enabledBorder: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(8),
-                                        borderSide: const BorderSide(
-                                          width: 0,
-                                          style: BorderStyle.none,
-                                        ),
-                                      ),
-                                      errorBorder: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(8),
-                                        borderSide: const BorderSide(
-                                            color: AppColors.red300,
-                                            width: 1.0),
-                                      ),
-                                    )),
-
-                                context: context,
-                                useSafeArea: true,
-                                showPhoneCode: true,
-                                // optional. Shows phone code before the country name.
-                                onSelect: (Country country) {
-                                  //   print('Select country: ${country.displayName}');
-                                  //     logger.d(country.phoneCode);
-                                  signUpController
-                                      .countryCode(country.countryCode);
-                                  signUpController
-                                      .countryPhoneCode(country.phoneCode);
-                                },
-                              );
+                              signUpController
+                                  .isObscure(!signUpController.isObscure.value);
                             },
-                            prefixIcon: Transform.scale(
-                              scale: .5,
-                              child: Obx(
-                                () => CountryFlag.fromCountryCode(
-                                  signUpController.countryCode.value,
-                                  height: 18,
-                                  width: 24,
-                                ),
-                              ),
-                            ),
-                            suffixIcon: const Icon(
-                              Icons.keyboard_arrow_down_rounded,
-                              color: AppColors.gray700,
-                            ),
-                          ),
-                        ),
-                        const SizedBox(
-                          width: 16,
-                        ),
-                        Flexible(
-                          child: PrimaryTextField(
-                            hintText: "Type your phone no",
-                            controller: signUpController.phoneController,
-                            validator: (v) => Validator.validateMobile(v!),
-                            keyboardType: TextInputType.phone,
-                          ),
-                        ),
-                      ],
+                            child: Icon(
+                              signUpController.isObscure.value
+                                  ? Iconsax.eye4
+                                  : Iconsax.eye_slash4,
+                              color: AppColors.gray400,
+                            )),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    const Text(
+                      'Confirm Password',
+                      style: AppTextStyle.labelMedium,
+                    ),
+                    const SizedBox(
+                      height: 8,
+                    ),
+                    Obx(
+                          () => PrimaryTextField(
+                            prefixIcon: const HeroIcon(HeroIcons.lockClosed),
+                        obscureText: signUpController.isObscure1.value,
+                        controller: signUpController.passwordCheckController,
+                        hintText: "Type your password again",
+                        validator: (v) => Validator.validateConfirmPassword(
+                            v!, signUpController.passwordController.text),
+                        suffixIcon: GestureDetector(
+                            onTap: () {
+                              signUpController.isObscure1(
+                                  !signUpController.isObscure1.value);
+                            },
+                            child: Icon(
+                              signUpController.isObscure1.value
+                                  ? Iconsax.eye4
+                                  : Iconsax.eye_slash4,
+                              color: AppColors.gray400,
+                            )),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 16,
                     ),
                   ],
                 ),
@@ -301,42 +169,7 @@ class SignUp extends StatelessWidget {
               alignment: Alignment.bottomCenter,
               child: Column(
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Obx(
-                        () => Checkbox(
-                          checkColor: Colors.white,
-                          fillColor: MaterialStateProperty.resolveWith(
-                              signUpController.getColor),
-                          value: signUpController.isChecked.value,
-                          onChanged: (bool? value) {
-                            signUpController.isChecked(value!);
-                          },
-                        ),
-                      ),
-                      const SizedBox(
-                        width: 16,
-                      ),
-                      Text(
-                        'I agree to the ',
-                        style: AppTextStyle.labelMedium
-                            .copyWith(color: AppColors.black),
-                      ),
-                      GestureDetector(
-                        onTap: () {
-                          signUpController.launchURL(
-                              'https://morphmydesign.com/privacy-policy');
-                        },
-                        child: Text(
-                          'terms and conditions',
-                          style: AppTextStyle.labelMedium.copyWith(
-                              color: AppColors.black,
-                              decoration: TextDecoration.underline),
-                        ),
-                      )
-                    ],
-                  ),
+
                   Padding(
                     padding: const EdgeInsets.symmetric(
                         horizontal: AppValues.horizontalPadding),
@@ -353,14 +186,14 @@ class SignUp extends StatelessWidget {
                             Get.toNamed(Routes.CREATEPASSWORD);
                           }
                         },
-                        isRounded: true,
-                        isElevated: true,
-                        color: AppColors.white,
-                        buttonNameWidget: GradientText(
-                          'Next',
+
+
+
+                        buttonNameWidget: Text(
+                          'Sign Up',
                           style: AppTextStyle.labelLarge
                               .copyWith(color: AppColors.white),
-                          colors: const [Color(0xffFF58A8), Color(0xff6100FF)],
+
                         )),
                   ),
                   const SizedBox(
