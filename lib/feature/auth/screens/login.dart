@@ -60,9 +60,9 @@ class Login extends StatelessWidget {
                   ),
                   PrimaryTextField(
                     prefixIcon: const HeroIcon(HeroIcons.envelope),
-                    hintText: "Type your email",
+                    hintText: "Type your username",
                     controller: loginController.emailController,
-                    validator: (v) => Validator.validateEmail(v!),
+                    validator: (v) => Validator.validateFirstName(v!),
                     keyboardType: TextInputType.emailAddress,
                   ),
                   const SizedBox(

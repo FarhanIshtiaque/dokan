@@ -16,10 +16,8 @@ class LoginController extends GetxController {
   var isObscure = true.obs;
   HttpService httpService = HttpService();
   final GlobalKey<FormState> key = GlobalKey<FormState>();
-  final GlobalKey<FormState> otpPageKey = GlobalKey<FormState>();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
-  final pinController = TextEditingController();
 
   @override
   void onInit() {
@@ -30,9 +28,10 @@ class LoginController extends GetxController {
   Future<void> userLogin(
       {required String email, required String password}) async {
     final dataMap = {
-      'email': email,
+      'username': email,
       'password': password,
     };
+    logger.d(dataMap);
 
     try {
       isLoading(true);
@@ -42,44 +41,32 @@ class LoginController extends GetxController {
       if (result != null) {
         if (result is Response) {
           var data = result.data;
-          logger.d(data);
+       //   logger.d(data);
 
-          if (data['success'] == true) {
-            if (data['data']["user"]["OTP_verified"] == true) {
-              LoginModel loginModel = LoginModel.fromJson(data);
-              LocalStorage.saveToken(loginModel.data.accessToken.toString());
-              LocalStorage.saveUsername(loginModel.data.user.firstName);
-              LocalStorage.saveFullUsername('${loginModel.data.user.firstName} ${loginModel.data.user.lastName}');
-              LocalStorage.saveUserId(loginModel.data.user.id);
-              LocalStorage.saveEmail(loginModel.data.user.email);
-              LocalStorage.saveAvatar(loginModel.data.user.avatar);
-              LocalStorage.savePhoneNo(loginModel.data.user.phone.toString());
+          if (result.statusCode == 200) {
+                LoginModel loginModel = LoginModel.fromJson(data);
+                LocalStorage.saveToken(loginModel.token);
+                LocalStorage.saveUsername(loginModel.userDisplayName);
 
-              Get.snackbar(
-                "Welcome to Morph",
-                loginModel.message,
-                backgroundColor: AppColors.green50,
-                icon: const Icon(
-                  Icons.check_circle_rounded,
-                  size: 40,
-                ),
-                shouldIconPulse: false,
-              );
-          //    Get.offAllNamed(Routes.DASHBOARD);
-            } else {
-              Get.snackbar(
-                "Opps",
-                data['message'],
-                backgroundColor: AppColors.red50,
-                icon: const Icon(
-                  Icons.check_circle_rounded,
-                  size: 40,
-                ),
-                shouldIconPulse: false,
-              );
-         //     Get.toNamed(Routes.LOGINVERIFYOTP);
+
+                LocalStorage.saveEmail(loginModel.userEmail);
+
+
+                Get.snackbar(
+                  "Welcome to Dokan",
+                  "Successfully login",
+                  backgroundColor: AppColors.green50,
+                  icon: const Icon(
+                    Icons.check_circle_rounded,
+                    size: 40,
+                  ),
+                  shouldIconPulse: false,
+                );
+                Get.offAllNamed(Routes.HOME);
+
+
             }
-          } else if (data['success'] == false) {
+
             Get.snackbar(
               'Opps',
               data['message'],
@@ -90,7 +77,7 @@ class LoginController extends GetxController {
                 size: 40,
               ),
             );
-          }
+
         } else {
           isLoading(false);
         }
