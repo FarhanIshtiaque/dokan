@@ -7,6 +7,7 @@ class AppColors {
   static const Color ultraRed = Color(0xFFFF708A);
   static const Color white = Color(0xFFFFFFFF);
   static const Color transparent = Color(0x00000000);
+  static const Color backgroundColor = Color(0xFFF8F8FA);
 
   static const Color gray50 = Color(0xFFF3F3F3);
   static const Color gray100 = Color(0xFFE8E8E8);

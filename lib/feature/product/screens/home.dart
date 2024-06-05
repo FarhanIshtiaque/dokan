@@ -1,6 +1,7 @@
 import 'package:custom_navigation_bar/custom_navigation_bar.dart';
 import 'package:dokan/feature/product/controller%20/homeController.dart';
 import 'package:dokan/feature/product/screens/product_list.dart';
+import 'package:dokan/feature/profile/screens/profile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -16,14 +17,18 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     final homeController = Get.put(HomeController());
     return Scaffold(
-      body:  PageView(
+      body: PageView(
         controller: homeController.controller,
         physics: const NeverScrollableScrollPhysics(),
-        children: const [ProductList(),Text('data'),Text('data'),Text('data')],
+        children: const [
+          ProductList(),
+          Text('data'),
+          Text('data'),
+          Profile()
+        ],
       ),
-      bottomNavigationBar:  Obx(
-        ()=> CustomNavigationBar(
-
+      bottomNavigationBar: Obx(
+        () => CustomNavigationBar(
           iconSize: 30.0,
           isFloating: true,
           selectedColor: AppColors.white,
@@ -38,35 +43,38 @@ class Home extends StatelessWidget {
             CustomNavigationBarItem(
               icon: const Icon(IconlyLight.home),
               selectedIcon: const Icon(IconlyBold.home),
-              //  title: Text("Home"),
+
             ),
             CustomNavigationBarItem(
               icon: const HeroIcon(HeroIcons.squares2x2),
-              selectedIcon: const HeroIcon(HeroIcons.squares2x2,style: HeroIconStyle.solid),
-              //  title: Text("Cart"),
+              selectedIcon: const HeroIcon(HeroIcons.squares2x2,
+                  style: HeroIconStyle.solid),
+
             ),
             CustomNavigationBarItem(
               icon: const HeroIcon(HeroIcons.magnifyingGlass),
-              selectedIcon: const HeroIcon(HeroIcons.magnifyingGlass,style: HeroIconStyle.solid),
-              // title: Text("Explore"),
+              selectedIcon: const HeroIcon(HeroIcons.magnifyingGlass,
+                  style: HeroIconStyle.solid),
+
             ),
             CustomNavigationBarItem(
               icon: const HeroIcon(HeroIcons.shoppingCart),
-              selectedIcon: const HeroIcon(HeroIcons.shoppingCart,style: HeroIconStyle.solid),
+              selectedIcon: const HeroIcon(HeroIcons.shoppingCart,
+                  style: HeroIconStyle.solid),
               // title: Text("Search"),
             ),
             CustomNavigationBarItem(
               icon: const Icon(IconlyLight.profile),
               selectedIcon: const Icon(IconlyBold.profile),
-              //  title: Text("Contact"),
+
             ),
           ],
-           currentIndex: homeController.currentIndex.value,
+          currentIndex: homeController.currentIndex.value,
           onTap: (index) {
-           homeController.currentIndex(index) ;
+            homeController.currentIndex(index);
 
             HapticFeedback.lightImpact();
-           homeController.   controller.animateToPage(index,
+            homeController.controller.animateToPage(index,
                 duration: const Duration(microseconds: 400),
                 curve: Curves.easeInOutCubicEmphasized);
           },

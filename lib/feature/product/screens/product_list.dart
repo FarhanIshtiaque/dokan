@@ -1,14 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:custom_navigation_bar/custom_navigation_bar.dart';
+
 import 'package:dokan/core/constants/app_colors.dart';
 import 'package:dokan/core/constants/app_values.dart';
 import 'package:dokan/core/constants/text_styles.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:heroicons/heroicons.dart';
-import 'package:iconly/iconly.dart';
-import 'package:lottie/lottie.dart';
+
 
 class ProductList extends StatelessWidget {
   const ProductList({Key? key}) : super(key: key);
@@ -187,7 +184,7 @@ class FilterWidget extends StatelessWidget {
         showModalBottomSheet(
           context: context,
           isScrollControlled: true,
-          shape: RoundedRectangleBorder(
+          shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.vertical(top: Radius.circular(16.0)),
           ),
           builder: (context) => FilterBottomSheet(),
@@ -245,6 +242,8 @@ class FilterWidget extends StatelessWidget {
 }
 
 class FilterBottomSheet extends StatefulWidget {
+  const FilterBottomSheet({super.key});
+
   @override
   _FilterBottomSheetState createState() => _FilterBottomSheetState();
 }

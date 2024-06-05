@@ -6,7 +6,7 @@ abstract class Routes {
 
 
   static const PROFILE = '/profile';
-  static const NAMECHANGE = '/name-change';
+  static const UPDATEPROFILE = '/update-profile';
 
 
 }
