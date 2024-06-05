@@ -8,8 +8,6 @@ import 'package:heroicons/heroicons.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:lottie/lottie.dart';
 
-import 'package:simple_gradient_text/simple_gradient_text.dart';
-
 import '../../../config/routes/app_pages.dart';
 import '../../../core/constants/app_assets.dart';
 import '../../../core/constants/app_colors.dart';
@@ -154,7 +152,7 @@ class Login extends StatelessWidget {
                       },
                       buttonNameWidget: Obx(
                         () => loginController.isLoading.value
-                            ? Lottie.asset(AppAssets.loaderPurple, width: 35)
+                            ? Lottie.asset(AppAssets.loaderWhite, width: 35)
                             :  Text(
                           'Login',
                           style: AppTextStyle.displayXXSmall.copyWith(color: AppColors.white),

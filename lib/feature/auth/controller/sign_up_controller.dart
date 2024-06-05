@@ -1,10 +1,6 @@
-import 'package:extended_masked_text/extended_masked_text.dart';
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
 import 'package:get/get.dart' hide Response;
-
-import 'package:url_launcher/url_launcher.dart';
-
 import '../../../config/network_service/network_service.dart';
 import '../../../config/routes/app_pages.dart';
 import '../../../core/constants/api_endpoints.dart';
