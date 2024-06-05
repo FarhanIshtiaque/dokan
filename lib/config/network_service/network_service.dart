@@ -53,12 +53,21 @@ class HttpService {
 
     try {
       if (method == Method.POST) {
+        if(authToken != null){
+          response = await _dio!.post(url,
+            data: params,
+            options: Options(headers: {"Authorization": "Bearer $authToken"}),
 
+          );
+        }
+        response = await _dio!.post(url,
+          data: params,
+
+
+        );
 
         // response = await _dio!.post(url, data: params,options: Options(headers:{"Authorization": authToken}));
-        response = await _dio!.post(url,
-            data: params,
-            options: Options(headers: {"Authorization": "Bearer $authToken"}));
+
       } else if (method == Method.DELETE) {
         response = await _dio!.delete(url);
       } else if (method == Method.PATCH) {

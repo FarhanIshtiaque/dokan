@@ -1,20 +1,15 @@
-import 'package:country_flags/country_flags.dart';
-import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:heroicons/heroicons.dart';
 import 'package:iconsax/iconsax.dart';
-
-import 'package:simple_gradient_text/simple_gradient_text.dart';
-
+import 'package:lottie/lottie.dart';
 import '../../../config/routes/app_pages.dart';
 import '../../../core/constants/app_assets.dart';
 import '../../../core/constants/app_colors.dart';
 import '../../../core/constants/app_values.dart';
 import '../../../core/constants/text_styles.dart';
-import '../../../core/helper/string_helper.dart';
 import '../../../core/helper/validator.dart';
 import '../../../core/resource/widgets/primary_button.dart';
 import '../../../core/resource/widgets/primary_textfield.dart';
@@ -70,10 +65,10 @@ class SignUp extends StatelessWidget {
                       height: 8,
                     ),
                     PrimaryTextField(
-                      prefixIcon: HeroIcon(HeroIcons.user),
+                      prefixIcon: const HeroIcon(HeroIcons.user),
                       hintText: "Type your name",
                       controller:
-                      signUpController.firstNameController,
+                      signUpController.nameController,
                       validator: (v) =>
                           Validator.validateFirstName(v!),
                     ),
@@ -104,24 +99,26 @@ class SignUp extends StatelessWidget {
                       height: 8,
                     ),
                     Obx(
-                          () => PrimaryTextField(
+                          () =>
+                          PrimaryTextField(
                             prefixIcon: const HeroIcon(HeroIcons.lockClosed),
-                        obscureText: signUpController.isObscure.value,
-                        hintText: "Type your password",
-                        controller: signUpController.passwordController,
-                        validator: (v) => Validator.validatePassword(v!),
-                        suffixIcon: GestureDetector(
-                            onTap: () {
-                              signUpController
-                                  .isObscure(!signUpController.isObscure.value);
-                            },
-                            child: Icon(
-                              signUpController.isObscure.value
-                                  ? Iconsax.eye4
-                                  : Iconsax.eye_slash4,
-                              color: AppColors.gray400,
-                            )),
-                      ),
+                            obscureText: signUpController.isObscure.value,
+                            hintText: "Type your password",
+                            controller: signUpController.passwordController,
+                            validator: (v) => Validator.validatePassword(v!),
+                            suffixIcon: GestureDetector(
+                                onTap: () {
+                                  signUpController
+                                      .isObscure(
+                                      !signUpController.isObscure.value);
+                                },
+                                child: Icon(
+                                  signUpController.isObscure.value
+                                      ? Iconsax.eye4
+                                      : Iconsax.eye_slash4,
+                                  color: AppColors.gray400,
+                                )),
+                          ),
                     ),
                     const SizedBox(
                       height: 16,
@@ -134,25 +131,29 @@ class SignUp extends StatelessWidget {
                       height: 8,
                     ),
                     Obx(
-                          () => PrimaryTextField(
+                          () =>
+                          PrimaryTextField(
                             prefixIcon: const HeroIcon(HeroIcons.lockClosed),
-                        obscureText: signUpController.isObscure1.value,
-                        controller: signUpController.passwordCheckController,
-                        hintText: "Type your password again",
-                        validator: (v) => Validator.validateConfirmPassword(
-                            v!, signUpController.passwordController.text),
-                        suffixIcon: GestureDetector(
-                            onTap: () {
-                              signUpController.isObscure1(
-                                  !signUpController.isObscure1.value);
-                            },
-                            child: Icon(
-                              signUpController.isObscure1.value
-                                  ? Iconsax.eye4
-                                  : Iconsax.eye_slash4,
-                              color: AppColors.gray400,
-                            )),
-                      ),
+                            obscureText: signUpController.isObscure1.value,
+                            controller: signUpController
+                                .passwordCheckController,
+                            hintText: "Type your password again",
+                            validator: (v) =>
+                                Validator.validateConfirmPassword(
+                                    v!, signUpController.passwordController
+                                    .text),
+                            suffixIcon: GestureDetector(
+                                onTap: () {
+                                  signUpController.isObscure1(
+                                      !signUpController.isObscure1.value);
+                                },
+                                child: Icon(
+                                  signUpController.isObscure1.value
+                                      ? Iconsax.eye4
+                                      : Iconsax.eye_slash4,
+                                  color: AppColors.gray400,
+                                )),
+                          ),
                     ),
                     const SizedBox(
                       height: 16,
@@ -176,24 +177,28 @@ class SignUp extends StatelessWidget {
                     child: PrimaryButton(
                         onPressed: () {
                           final isValid =
-                              signUpController.key.currentState!.validate();
+                          signUpController.key.currentState!.validate();
 
                           if (isValid) {
-                            signUpController.phoneNo(
-                                signUpController.countryPhoneCode.value +
-                                    StringHelper.unMask(
-                                        signUpController.phoneController.text));
-                           // Get.toNamed(Routes.CREATEPASSWORD);
+                            signUpController.userSignUp(
+                                email: signUpController.emailController.text.trim(),
+                                password: signUpController.passwordController.text,
+                                name: signUpController.nameController.text.trim());
+
+                            // Get.toNamed(Routes.CREATEPASSWORD);
                           }
                         },
 
 
+                        buttonNameWidget: Obx(
+                          ()=> signUpController.isLoading.value
+                              ? Lottie.asset(AppAssets.loaderWhite, width: 35)
+                              : Text(
+                            'Sign Up',
+                            style: AppTextStyle.labelLarge
+                                .copyWith(color: AppColors.white),
 
-                        buttonNameWidget: Text(
-                          'Sign Up',
-                          style: AppTextStyle.labelLarge
-                              .copyWith(color: AppColors.white),
-
+                          ),
                         )),
                   ),
                   const SizedBox(

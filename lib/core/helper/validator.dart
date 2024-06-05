@@ -49,7 +49,7 @@ class Validator {
 
   static String? validateFirstName(String value) {
     if (value.isEmpty) {
-      return "Please enter a valid first name";
+      return "Please enter a valid username";
     } else {
       return null;
     }
