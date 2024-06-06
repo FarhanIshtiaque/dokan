@@ -118,6 +118,7 @@ class HttpService {
       } else if (e.type == DioErrorType.sendTimeout) {
         Get.snackbar('Opps', "Send timeout in connection with API server");
       } else if (e.type == DioErrorType.response) {
+        logger.d(e.response);
         Get.snackbar('Opps', e.response?.data['message'],
             backgroundColor: AppColors.red300,
             borderRadius: 12,

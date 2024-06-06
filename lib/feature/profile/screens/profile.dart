@@ -2,6 +2,7 @@ import 'package:dokan/config/routes/app_pages.dart';
 import 'package:dokan/core/constants/app_colors.dart';
 import 'package:dokan/core/constants/app_values.dart';
 import 'package:dokan/core/constants/text_styles.dart';
+import 'package:dokan/core/helper/storage_helper.dart';
 import 'package:dokan/feature/profile/controller/profile_controller.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
@@ -36,11 +37,11 @@ class Profile extends StatelessWidget {
             DottedBorder(
               color: const Color(0xFFFFADAD),
               radius: const Radius.circular(12),
-              dashPattern: [4, 2, 4, 3],
+              dashPattern: const [4, 2, 4, 3],
               borderType: BorderType.Circle,
-              padding: EdgeInsets.all(8),
+              padding: const EdgeInsets.all(8),
               child: ProfilePicture(
-                name: 'Aditya Dharmawan Saputra',
+                name: profileController.userName.value,
                 radius: 64,
                 fontsize: 42,
               ),
@@ -49,14 +50,14 @@ class Profile extends StatelessWidget {
               height: 36,
             ),
             Text(
-              'John Smith',
+              profileController.userName.value,
               style: AppTextStyle.headingSmall,
             ),
             const SizedBox(
               height: 6,
             ),
             Text(
-              'info@johnsmith.com',
+                profileController.email.value,
               style: AppTextStyle.bodyMedium.copyWith(color: AppColors.gray700),
             ),
             const SizedBox(
@@ -70,13 +71,37 @@ class Profile extends StatelessWidget {
               child:  Column(
                 children: [
                   ListTile(
-                    title: Text(
+                    title: const Text(
                       "Account",
                       style: AppTextStyle.labelLarge,
                     ),
                     leading: Icon(IconlyLight.profile),
                     trailing: HeroIcon(HeroIcons.chevronRight),
                     onTap: (){Get.toNamed(Routes.UPDATEPROFILE);},
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 8,),
+            Container(
+              decoration: BoxDecoration(
+                color: AppColors.white,
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child:  Column(
+                children: [
+                  ListTile(
+                    title: const Text(
+                      "Logout",
+                      style: AppTextStyle.labelLarge,
+                    ),
+                    leading: const Icon(IconlyLight.logout),
+                    trailing: const HeroIcon(HeroIcons.chevronRight),
+                    onTap: (){
+                      StorageHelper.removeUserData();
+                      Get.offAllNamed(Routes.LOGIN);
+
+                      },
                   ),
                 ],
               ),

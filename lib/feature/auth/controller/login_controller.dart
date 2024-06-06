@@ -31,7 +31,7 @@ class LoginController extends GetxController {
       'username': email,
       'password': password,
     };
-    logger.d(dataMap);
+  //  logger.d(dataMap);
 
     try {
       isLoading(true);
@@ -41,7 +41,7 @@ class LoginController extends GetxController {
       if (result != null) {
         if (result is Response) {
           var data = result.data;
-       //   logger.d(data);
+          logger.d(data);
 
           if (result.statusCode == 200) {
                 LoginModel loginModel = LoginModel.fromJson(data);
@@ -67,16 +67,7 @@ class LoginController extends GetxController {
 
             }
 
-            Get.snackbar(
-              'Opps',
-              data['message'],
-              backgroundColor: AppColors.red600,
-              borderRadius: 12,
-              icon: const Icon(
-                Icons.error_outline,
-                size: 40,
-              ),
-            );
+
 
         } else {
           isLoading(false);

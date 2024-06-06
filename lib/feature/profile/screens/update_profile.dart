@@ -30,7 +30,7 @@ class UpdateProfile extends StatelessWidget {
       ),
       body: Padding(
         padding:
-        const EdgeInsets.symmetric(horizontal: AppValues.horizontalPadding),
+            const EdgeInsets.symmetric(horizontal: AppValues.horizontalPadding),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
@@ -42,9 +42,9 @@ class UpdateProfile extends StatelessWidget {
               radius: const Radius.circular(12),
               dashPattern: const [4, 2, 4, 3],
               borderType: BorderType.Circle,
-              padding: EdgeInsets.all(8),
-              child: const ProfilePicture(
-                name: 'Aditya Dharmawan Saputra',
+              padding: const EdgeInsets.all(8),
+              child: ProfilePicture(
+                name: profileController.userName.value,
                 radius: 64,
                 fontsize: 42,
               ),
@@ -52,15 +52,15 @@ class UpdateProfile extends StatelessWidget {
             const SizedBox(
               height: 36,
             ),
-            const Text(
-              'John Smith',
+            Text(
+              profileController.userName.value,
               style: AppTextStyle.headingSmall,
             ),
             const SizedBox(
               height: 6,
             ),
             Text(
-              'info@johnsmith.com',
+              profileController.email.value,
               style: AppTextStyle.bodyMedium.copyWith(color: AppColors.gray700),
             ),
             const SizedBox(
@@ -81,10 +81,8 @@ class UpdateProfile extends StatelessWidget {
                   PrimaryTextField(
                     prefixIcon: const HeroIcon(HeroIcons.user),
                     hintText: "Your first name",
-                    controller:
-                    profileController.firstNameController,
-                    validator: (v) =>
-                        Validator.validateFirstName(v!),
+                    controller: profileController.firstNameController,
+                    validator: (v) => Validator.validateFirstName(v!),
                   ),
                   const SizedBox(
                     height: 16,
@@ -100,27 +98,39 @@ class UpdateProfile extends StatelessWidget {
                     prefixIcon: const HeroIcon(HeroIcons.user),
                     hintText: "Your last name",
                     controller: profileController.lastNameController,
-                    validator: (v) =>Validator.validateLastName(v!),
+                    validator: (v) => Validator.validateLastName(v!),
                   ),
-
-
                   const SizedBox(
                     height: 16,
                   ),
                 ],
               ),
             ),
-            SizedBox(height: 24,),
-            PrimaryButton(onPressed: (){}, buttonNameWidget: Obx(
+            const SizedBox(
+              height: 24,
+            ),
+            PrimaryButton(
+                onPressed: () {
+                  final isValid =
+                      profileController.key.currentState!.validate();
+
+                  if (isValid) {
+                    profileController.updateProfile(
+                        firstName:
+                            profileController.firstNameController.text.trim(),
+                        lastName:
+                            profileController.lastNameController.text.trim());
+                  }
+                },
+                buttonNameWidget: Obx(
                   () => profileController.isLoading.value
-                  ? Lottie.asset(AppAssets.loaderPurple, width: 35)
-                  :  Text(
-                'Login',
-                style: AppTextStyle.displayXXSmall.copyWith(color: AppColors.white),
-
-              ),
-            ))
-
+                      ? Lottie.asset(AppAssets.loaderWhite, width: 35)
+                      : Text(
+                          'Update',
+                          style: AppTextStyle.displayXXSmall
+                              .copyWith(color: AppColors.white),
+                        ),
+                ))
           ],
         ),
       ),
