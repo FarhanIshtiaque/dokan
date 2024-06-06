@@ -44,7 +44,7 @@ class ProfileController extends GetxController{
         if (result is Response) {
           var data = result.data;
 
-          logger.d(data);
+        //  logger.d(data);
           if (result.statusCode ==200) {
             ProfileDataModel profileDataModel = ProfileDataModel.fromJson(data);
             profileId(profileDataModel.id);
@@ -82,7 +82,7 @@ class ProfileController extends GetxController{
         if (result is Response) {
           var data = result.data;
 
-          logger.d(data);
+       //   logger.d(data);
           if (result.statusCode ==200) {
             Get.snackbar(
               "Success",

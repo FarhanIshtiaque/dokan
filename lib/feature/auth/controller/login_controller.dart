@@ -41,7 +41,7 @@ class LoginController extends GetxController {
       if (result != null) {
         if (result is Response) {
           var data = result.data;
-          logger.d(data);
+        //  logger.d(data);
 
           if (result.statusCode == 200) {
                 LoginModel loginModel = LoginModel.fromJson(data);

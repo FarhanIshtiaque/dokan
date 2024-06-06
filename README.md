@@ -1,17 +1,22 @@
-# dokan
+# Welcome to Dokan
 
-A new Flutter project.
+Its a **Flutter** project. **GetX** state management used **MVC** pattern used.
 
-## Getting Started
 
-This project is a starting point for a Flutter application.
+# Instruction
 
-A few resources to get you started if this is your first Flutter project:
+No code generation command is needed. Just **flutter run** will run the project
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## Features in Project
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
-# dokan
+- Login
+- Sign Up
+- Product List
+- Product Filter (All the option)
+- Profile
+- Profile Update (API doesn't allow to change user data)
+- Native Splash
+- Native Icon
+
+## Demo
+https://github.com/FarhanIshtiaque/dokan/assets/22623658/d527a6ac-df81-4470-a247-e771bad0df50
