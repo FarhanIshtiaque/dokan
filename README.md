@@ -20,3 +20,6 @@ No code generation command is needed. Just **flutter run** will run the project
 
 ## Demo
 https://github.com/FarhanIshtiaque/dokan/assets/22623658/d527a6ac-df81-4470-a247-e771bad0df50
+
+## Apk 
+[app-release.apk.zip](https://github.com/user-attachments/files/15672230/app-release.apk.zip)
