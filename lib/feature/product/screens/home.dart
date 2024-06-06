@@ -22,6 +22,7 @@ class Home extends StatelessWidget {
         physics: const NeverScrollableScrollPhysics(),
         children: const [
           ProductList(),
+          Text('Nothing'),
           Text('data'),
           Text('data'),
           Profile()
